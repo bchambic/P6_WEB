@@ -1,0 +1,109 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12">
+        <div class="jumbotron bg-light p-5 rounded">
+            <h1 class="display-4"><i class="bi bi-cup-hot-fill text-primary"></i> Bienvenido al Sistema Restaurante</h1>
+            <p class="lead">
+                {% if request.session.tipo_usuario == 'admin' %}
+                    Panel de Administración
+                {% else %}
+                    Panel de Operaciones
+                {% endif %}
+            </p>
+            <hr class="my-4">
+            <p>
+                {% if request.session.tipo_usuario == 'admin' %}
+                    Gestiona platos, mesas, pedidos y visualiza reportes de ventas.
+                {% else %}
+                    Toma pedidos y gestiona el estado de los mismos.
+                {% endif %}
+            </p>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-4">
+    <!-- MOSTRAR A ADMIN Y OPERADORES -->
+    {% if  request.session.tipo_usuario == 'operador' %}
+    <div class="col-md-4 mb-4">
+        <div class="card text-white bg-primary">
+            <div class="card-body">
+                <div class="d-flex justify-content-between">
+                    <div>
+                        <h4 class="card-title">Tomar Pedido</h4>
+                        <p class="card-text">Nuevo pedido por mesa</p>
+                    </div>
+                    <i class="bi bi-cart-plus display-6"></i>
+                </div>
+                <a href="{% url 'tomar_pedido' %}" class="btn btn-light btn-sm mt-2">Ir a Tomar Pedido</a>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-4 mb-4">
+        <div class="card text-white bg-success">
+            <div class="card-body">
+                <div class="d-flex justify-content-between">
+                    <div>
+                        <h4 class="card-title">Ver Pedidos</h4>
+                        <p class="card-text">Lista de todos los pedidos</p>
+                    </div>
+                    <i class="bi bi-receipt display-6"></i>
+                </div>
+                <a href="{% url 'listar_pedidos' %}" class="btn btn-light btn-sm mt-2">Ver Pedidos</a>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+    
+    <!-- SOLO PARA ADMIN -->
+    {% if request.session.tipo_usuario == 'admin' %}
+    <div class="col-md-4 mb-4">
+        <div class="card text-white bg-warning">
+            <div class="card-body">
+                <div class="d-flex justify-content-between">
+                    <div>
+                        <h4 class="card-title">Gestión Platos</h4>
+                        <p class="card-text">Administrar menú</p>
+                    </div>
+                    <i class="bi bi-egg-fried display-6"></i>
+                </div>
+                <a href="{% url 'listar_platos' %}" class="btn btn-light btn-sm mt-2">Gestionar</a>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-4 mb-4">
+        <div class="card text-white bg-info">
+            <div class="card-body">
+                <div class="d-flex justify-content-between">
+                    <div>
+                        <h4 class="card-title">Gestión Mesas</h4>
+                        <p class="card-text">Control de mesas</p>
+                    </div>
+                    <i class="bi bi-table display-6"></i>
+                </div>
+                <a href="{% url 'listar_mesas' %}" class="btn btn-light btn-sm mt-2">Gestionar</a>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-4 mb-4">
+        <div class="card text-white bg-dark">
+            <div class="card-body">
+                <div class="d-flex justify-content-between">
+                    <div>
+                        <h4 class="card-title">Reporte Ventas</h4>
+                        <p class="card-text">Estadísticas de ventas</p>
+                    </div>
+                    <i class="bi bi-graph-up display-6"></i>
+                </div>
+                <a href="{% url 'reporte_ventas' %}" class="btn btn-light btn-sm mt-2">Ver Reporte</a>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}
