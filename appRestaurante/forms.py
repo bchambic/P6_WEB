@@ -1,24 +1,5 @@
 from django import forms
 
-class LoginForm(forms.Form):
-    username = forms.CharField(
-        label="Usuario",
-        max_length=50,
-        required=True,
-        widget=forms.TextInput(attrs={
-            'class': 'form-control',
-            'placeholder': 'Ingrese su usuario'
-        })
-    )
-    password = forms.CharField(
-        label="Contraseña",
-        widget=forms.PasswordInput(attrs={
-            'class': 'form-control', 
-            'placeholder': 'Ingrese su contraseña'
-        }),
-        required=True
-    )
-    
 class PlatoForm(forms.Form):
     descripcion = forms.CharField(label="Descripción", max_length=200, required=True)
     precio = forms.DecimalField(label="Precio", max_digits=10, decimal_places=2, required=True)
@@ -45,10 +26,10 @@ class DetallePedidoForm(forms.Form):
     
     
 class PedidoMesaForm(forms.Form):
-    id_mesa = forms.ChoiceField(
-        label="Seleccionar Mesa",
+    id_mesa = forms.IntegerField(
+        label="Mesa",
         required=True,
-        widget=forms.Select(attrs={'class': 'form-control'})
+        widget=forms.NumberInput(attrs={'class': 'form-control'})
     )
     cliente = forms.CharField(
         label="Cliente",
@@ -61,11 +42,3 @@ class PedidoMesaForm(forms.Form):
         required=False,
         widget=forms.Textarea(attrs={'class': 'form-control', 'rows': 3})
     )
-    
-    def __init__(self, *args, **kwargs):
-        super(PedidoMesaForm, self).__init__(*args, **kwargs)
-        # Obtener mesas disponibles para el dropdown
-        from .models import Mesa
-        mesas_disponibles = Mesa.objects.filter(estado='Disponible')
-        choices = [(mesa.id_mesa, f"Mesa {mesa.id_mesa} - {mesa.ubicacion}") for mesa in mesas_disponibles]
-        self.fields['id_mesa'].choices = [('', '-- Seleccione una mesa --')] + choices

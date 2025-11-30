@@ -1,33 +1,4 @@
 from django.db import models
-import bcrypt
-
-class UsuarioPersonalizado(models.Model):
-    TIPO_USUARIO = [
-        ('admin', 'Administrador'),
-        ('operador', 'Operador'),
-    ]
-    
-    id_usuario = models.AutoField(primary_key=True)
-    username = models.CharField(max_length=50, unique=True)
-    password_hash = models.CharField(max_length=255)  # Para bcrypt
-    tipo_usuario = models.CharField(max_length=10, choices=TIPO_USUARIO)
-    activo = models.BooleanField(default=True)
-    fecha_creacion = models.DateTimeField(auto_now_add=True)
-
-    class Meta:
-        managed = True  # Esta tabla SÍ la maneja Django
-        db_table = 'usuarios'
-
-    def set_password(self, password):
-        # Usando bcrypt
-        salt = bcrypt.gensalt()
-        self.password_hash = bcrypt.hashpw(password.encode('utf-8'), salt).decode('utf-8')
-    
-    def check_password(self, password):
-        return bcrypt.checkpw(password.encode('utf-8'), self.password_hash.encode('utf-8'))
-
-    def __str__(self):
-        return f"{self.username} ({self.tipo_usuario})"
 
 class Plato(models.Model):
     id_plato = models.AutoField(primary_key=True)

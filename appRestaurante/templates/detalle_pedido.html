@@ -31,7 +31,7 @@
                         <td>{{ detalle.id_pedido.id_pedido }}</td>
                         <td>{{ detalle.id_pedido.cliente }}</td>
                         <td>{{ detalle.cantidad }}</td>
-                        <td>Bs. {{ detalle.subtotal }}</td>
+                        <td>S/ {{ detalle.subtotal }}</td>
                         <td class="table-actions">
                             <a href="{% url 'eliminar_detalle_pedido' detalle.id_plato.id_plato detalle.id_pedido.id_pedido %}" 
                                class="btn btn-danger btn-sm" 

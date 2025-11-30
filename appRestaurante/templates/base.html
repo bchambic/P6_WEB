@@ -36,71 +36,20 @@
 </head>
 <body>
     <!-- Navbar -->
-    <!-- En el navbar, reemplaza el contenido actual -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
         <div class="container-fluid">
             <a class="navbar-brand" href="{% url 'index' %}">
                 <i class="bi bi-cup-hot-fill"></i> Sistema Restaurante
             </a>
-            
-            {% if request.session.user_id %}
-            <div class="navbar-nav ms-auto">
-                <div class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle text-white" href="#" role="button" data-bs-toggle="dropdown">
-                        <i class="bi bi-person-circle"></i> 
-                        {{ request.session.username }}
-                        <span class="badge bg-light text-dark ms-1">
-                            {{ request.session.tipo_usuario }}
-                        </span>
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li><span class="dropdown-item-text">
-                            Usuario: {{ request.session.username }}
-                        </span></li>
-                        <li><span class="dropdown-item-text">
-                            Tipo: {{ request.session.tipo_usuario }}
-                        </span></li>
-                        <li><hr class="dropdown-divider"></li>
-                        <li>
-                            <a class="dropdown-item text-danger" href="{% url 'logout' %}">
-                                <i class="bi bi-box-arrow-right"></i> Cerrar Sesión
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            {% endif %}
         </div>
     </nav>
+
     <div class="container-fluid">
         <div class="row">
-            <!-- Sidebar -->
             <!-- Sidebar -->
             <div class="col-md-3 col-lg-2 sidebar d-md-block bg-light">
                 <div class="position-sticky pt-3">
                     <ul class="nav flex-column">
-                        
-                        <!-- MOSTRAR A ADMIN Y OPERADORES -->
-                        {% if request.session.tipo_usuario == 'operador' %}
-                        <li class="nav-item">
-                            <a class="nav-link {% if request.path == '/tomar-pedido/' %}active{% endif %}" href="{% url 'tomar_pedido' %}">
-                                <i class="bi bi-cart-plus"></i> Tomar Pedido
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link {% if request.path == '/pedidos/' %}active{% endif %}" href="{% url 'listar_pedidos' %}">
-                                <i class="bi bi-receipt"></i> Ver Pedidos
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link {% if request.path == '/detalles-pedido/' %}active{% endif %}" href="{% url 'listar_detalles_pedido' %}">
-                                <i class="bi bi-list-check"></i> Detalles Pedidos
-                            </a>
-                        </li>
-                        {% endif %}
-                        
-                        <!-- SOLO PARA ADMIN -->
-                        {% if request.session.tipo_usuario == 'admin' %}
                         <li class="nav-item">
                             <a class="nav-link {% if request.path == '/platos/' %}active{% endif %}" href="{% url 'listar_platos' %}">
                                 <i class="bi bi-egg-fried"></i> Gestión de Platos
@@ -112,12 +61,26 @@
                             </a>
                         </li>
                         <li class="nav-item">
+                            <a class="nav-link {% if request.path == '/pedidos/' %}active{% endif %}" href="{% url 'listar_pedidos' %}">
+                                <i class="bi bi-receipt"></i> Gestión de Pedidos
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link {% if request.path == '/detalles-pedido/' %}active{% endif %}" href="{% url 'listar_detalles_pedido' %}">
+                                <i class="bi bi-list-check"></i> Detalles de Pedidos
+                            </a>
+                        </li>
+                        <!-- Funcionalidades, después de los enlaces existentes -->
+                        <li class="nav-item">
+                            <a class="nav-link {% if request.path == '/tomar-pedido/' %}active{% endif %}" href="{% url 'tomar_pedido' %}">
+                                <i class="bi bi-cart-plus"></i> Tomar Pedido
+                            </a>
+                        </li>
+                        <li class="nav-item">
                             <a class="nav-link {% if request.path == '/reporte-ventas/' %}active{% endif %}" href="{% url 'reporte_ventas' %}">
                                 <i class="bi bi-graph-up"></i> Reporte Ventas
                             </a>
                         </li>
-                        {% endif %}
-                        
                     </ul>
                 </div>
             </div>
