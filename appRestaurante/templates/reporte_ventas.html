@@ -11,7 +11,7 @@
         <div class="card text-white bg-primary">
             <div class="card-body">
                 <h5 class="card-title">Total Ingresos</h5>
-                <h3>S/ {{ total_ingresos_general }}</h3>
+                <h3>Bs. {{ total_ingresos_general }}</h3>
             </div>
         </div>
     </div>
@@ -59,7 +59,7 @@
                         <td>{{ venta.id_plato__categoria }}</td>
                         <td>{{ venta.veces_pedido }}</td>
                         <td>{{ venta.total_vendido }}</td>
-                        <td><strong>S/ {{ venta.total_ingresos }}</strong></td>
+                        <td><strong>Bs. {{ venta.total_ingresos }}</strong></td>
                     </tr>
                     {% empty %}
                     <tr>
@@ -92,7 +92,7 @@
                     <tr>
                         <td>{{ categoria.id_plato__categoria }}</td>
                         <td>{{ categoria.total_vendido }}</td>
-                        <td><strong>S/ {{ categoria.total_ingresos }}</strong></td>
+                        <td><strong>Bs. {{ categoria.total_ingresos }}</strong></td>
                     </tr>
                     {% empty %}
                     <tr>

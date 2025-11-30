@@ -26,7 +26,7 @@
 
 <div class="row mt-4">
     <!-- MOSTRAR A ADMIN Y OPERADORES -->
-    {% if request.session.tipo_usuario == 'admin' or request.session.tipo_usuario == 'operador' %}
+    {% if  request.session.tipo_usuario == 'operador' %}
     <div class="col-md-4 mb-4">
         <div class="card text-white bg-primary">
             <div class="card-body">

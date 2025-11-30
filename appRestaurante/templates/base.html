@@ -81,7 +81,7 @@
                     <ul class="nav flex-column">
                         
                         <!-- MOSTRAR A ADMIN Y OPERADORES -->
-                        {% if request.session.tipo_usuario == 'admin' or request.session.tipo_usuario == 'operador' %}
+                        {% if request.session.tipo_usuario == 'operador' %}
                         <li class="nav-item">
                             <a class="nav-link {% if request.path == '/tomar-pedido/' %}active{% endif %}" href="{% url 'tomar_pedido' %}">
                                 <i class="bi bi-cart-plus"></i> Tomar Pedido

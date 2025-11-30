@@ -45,10 +45,8 @@ def login_view(request):
     return render(request, 'login.html', {'form': form})
 
 def redirect_por_tipo_usuario(tipo_usuario):
-    if tipo_usuario == 'admin':
-        return redirect('reporte_ventas')
-    else:  # operador
-        return redirect('tomar_pedido')
+    # TODOS van al index, no importa el tipo de usuario
+    return redirect('index')
 
 def logout_view(request):
     # Limpiar sesión
@@ -423,7 +421,9 @@ def actualizar_estado_pedido(request, id_pedido):
 
 # PÁGINA PRINCIPAL REDIRIGE SEGÚN USUARIO
 def index(request):
+    # Si el usuario está logueado, mostrar el dashboard
     if 'user_id' in request.session:
-        return redirect_por_tipo_usuario(request.session['tipo_usuario'])
+        return render(request, 'index.html')
     else:
+        # Si no está logueado, redirigir al login
         return redirect('login')
