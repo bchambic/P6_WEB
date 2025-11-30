@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="card">
+    <div class="card-header bg-success text-white">
+        <h4 class="mb-0"><i class="bi bi-cart-plus"></i> Seleccionar Platos - Pedido #{{ pedido.id_pedido }}</h4>
+    </div>
+    <div class="card-body">
+        <div class="mb-4">
+            <p><strong>Cliente:</strong> {{ pedido.cliente }}</p>
+            <p><strong>Mesa:</strong> {{ pedido.id_mesa.id_mesa }}</p>
+        </div>
+        
+        <form method="post">
+            {% csrf_token %}
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>Seleccionar</th>
+                            <th>Plato</th>
+                            <th>Descripción</th>
+                            <th>Categoría</th>
+                            <th>Precio</th>
+                            <th>Cantidad</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for plato in platos %}
+                        <tr>
+                            <td>
+                                <input type="checkbox" name="platos" value="{{ plato.id_plato }}" class="form-check-input">
+                            </td>
+                            <td>{{ plato.id_plato }}</td>
+                            <td>{{ plato.descripcion }}</td>
+                            <td>{{ plato.categoria }}</td>
+                            <td>S/ {{ plato.precio }}</td>
+                            <td>
+                                <input type="number" name="cantidades" value="1" min="1" max="10" class="form-control" style="width: 80px;">
+                            </td>
+                        </tr>
+                        {% empty %}
+                        <tr>
+                            <td colspan="6" class="text-center">No hay platos disponibles</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="d-flex gap-2 mt-4">
+                <button type="submit" class="btn btn-primary">
+                    <i class="bi bi-check-circle"></i> Finalizar Pedido
+                </button>
+                <a href="{% url 'listar_pedidos' %}" class="btn btn-secondary">
+                    <i class="bi bi-arrow-left"></i> Cancelar
+                </a>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12">
+        <div class="jumbotron bg-light p-5 rounded">
+            <h1 class="display-4"><i class="bi bi-cup-hot-fill text-primary"></i> Bienvenido al Sistema Restaurante</h1>
+            <p class="lead">Sistema de gestión integral para restaurantes</p>
+            <hr class="my-4">
+            <p>Gestiona platos, mesas, pedidos y detalles de manera eficiente.</p>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-4">
+    <div class="col-md-3 mb-4">
+        <div class="card text-white bg-primary">
+            <div class="card-body">
+                <div class="d-flex justify-content-between">
+                    <div>
+                        <h4 class="card-title">Platos</h4>
+                        <p class="card-text">Gestión de menú</p>
+                    </div>
+                    <i class="bi bi-egg-fried display-6"></i>
+                </div>
+                <a href="{% url 'listar_platos' %}" class="btn btn-light btn-sm mt-2">Gestionar</a>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-3 mb-4">
+        <div class="card text-white bg-success">
+            <div class="card-body">
+                <div class="d-flex justify-content-between">
+                    <div>
+                        <h4 class="card-title">Mesas</h4>
+                        <p class="card-text">Control de mesas</p>
+                    </div>
+                    <i class="bi bi-table display-6"></i>
+                </div>
+                <a href="{% url 'listar_mesas' %}" class="btn btn-light btn-sm mt-2">Gestionar</a>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-3 mb-4">
+        <div class="card text-white bg-warning">
+            <div class="card-body">
+                <div class="d-flex justify-content-between">
+                    <div>
+                        <h4 class="card-title">Pedidos</h4>
+                        <p class="card-text">Registro de pedidos</p>
+                    </div>
+                    <i class="bi bi-receipt display-6"></i>
+                </div>
+                <a href="{% url 'listar_pedidos' %}" class="btn btn-light btn-sm mt-2">Gestionar</a>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-3 mb-4">
+        <div class="card text-white bg-info">
+            <div class="card-body">
+                <div class="d-flex justify-content-between">
+                    <div>
+                        <h4 class="card-title">Detalles</h4>
+                        <p class="card-text">Detalles de pedidos</p>
+                    </div>
+                    <i class="bi bi-list-check display-6"></i>
+                </div>
+                <a href="{% url 'listar_detalles_pedido' %}" class="btn btn-light btn-sm mt-2">Gestionar</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

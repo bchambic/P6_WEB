@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2><i class="bi bi-egg-fried"></i> Lista de Platos</h2>
+    <a href="{% url 'crear_plato' %}" class="btn btn-success">
+        <i class="bi bi-plus-circle"></i> Nuevo Plato
+    </a>
+</div>
+
+<div class="card">
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-striped table-hover">
+                <thead class="table-dark">
+                    <tr>
+                        <th>ID</th>
+                        <th>Descripción</th>
+                        <th>Precio</th>
+                        <th>Categoría</th>
+                        <th>Disponible</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for plato in platos %}
+                    <tr>
+                        <td>{{ plato.id_plato }}</td>
+                        <td>{{ plato.descripcion }}</td>
+                        <td>S/ {{ plato.precio }}</td>
+                        <td>{{ plato.categoria }}</td>
+                        <td>
+                            {% if plato.disponible %}
+                                <span class="badge bg-success">Sí</span>
+                            {% else %}
+                                <span class="badge bg-danger">No</span>
+                            {% endif %}
+                        </td>
+                        <td class="table-actions">
+                            <a href="{% url 'actualizar_plato' plato.id_plato %}" class="btn btn-warning btn-sm">
+                                <i class="bi bi-pencil"></i>
+                            </a>
+                            <a href="{% url 'eliminar_plato' plato.id_plato %}" class="btn btn-danger btn-sm" 
+                               onclick="return confirm('¿Estás seguro de eliminar este plato?')">
+                                <i class="bi bi-trash"></i>
+                            </a>
+                        </td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="6" class="text-center">No hay platos registrados</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

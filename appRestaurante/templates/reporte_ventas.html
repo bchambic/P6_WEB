@@ -1,0 +1,107 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2><i class="bi bi-graph-up"></i> Reporte de Ventas por Plato</h2>
+</div>
+
+<!-- Resumen General -->
+<div class="row mb-4">
+    <div class="col-md-4">
+        <div class="card text-white bg-primary">
+            <div class="card-body">
+                <h5 class="card-title">Total Ingresos</h5>
+                <h3>S/ {{ total_ingresos_general }}</h3>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card text-white bg-success">
+            <div class="card-body">
+                <h5 class="card-title">Total Platos Vendidos</h5>
+                <h3>{{ total_platos_vendidos }}</h3>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card text-white bg-info">
+            <div class="card-body">
+                <h5 class="card-title">Platos Diferentes</h5>
+                <h3>{{ ventas_por_plato|length }}</h3>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Ventas por Plato -->
+<div class="card mb-4">
+    <div class="card-header bg-dark text-white">
+        <h5 class="mb-0"><i class="bi bi-egg-fried"></i> Ventas por Plato</h5>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Plato</th>
+                        <th>Descripción</th>
+                        <th>Categoría</th>
+                        <th>Veces Pedido</th>
+                        <th>Cantidad Vendida</th>
+                        <th>Total Ingresos</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for venta in ventas_por_plato %}
+                    <tr>
+                        <td>{{ venta.id_plato__id_plato }}</td>
+                        <td>{{ venta.id_plato__descripcion }}</td>
+                        <td>{{ venta.id_plato__categoria }}</td>
+                        <td>{{ venta.veces_pedido }}</td>
+                        <td>{{ venta.total_vendido }}</td>
+                        <td><strong>S/ {{ venta.total_ingresos }}</strong></td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="6" class="text-center">No hay ventas registradas</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- Ventas por Categoría -->
+<div class="card">
+    <div class="card-header bg-secondary text-white">
+        <h5 class="mb-0"><i class="bi bi-tags"></i> Ventas por Categoría</h5>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Categoría</th>
+                        <th>Platos Vendidos</th>
+                        <th>Total Ingresos</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for categoria in ventas_por_categoria %}
+                    <tr>
+                        <td>{{ categoria.id_plato__categoria }}</td>
+                        <td>{{ categoria.total_vendido }}</td>
+                        <td><strong>S/ {{ categoria.total_ingresos }}</strong></td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="3" class="text-center">No hay ventas por categoría</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}
