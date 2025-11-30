@@ -28,5 +28,9 @@ urlpatterns = [
     path('reporte-ventas/', views.reporte_ventas_platos, name='reporte_ventas'),
     path('actualizar-estado/<int:id_pedido>/', views.actualizar_estado_pedido, name='actualizar_estado'),
     
+    # URLs de autenticación
+    path('login/', views.login_view, name='login'),
+    path('logout/', views.logout_view, name='logout'),
+
     path('', views.index, name='index'),
 ]

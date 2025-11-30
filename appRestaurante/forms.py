@@ -1,5 +1,24 @@
 from django import forms
 
+class LoginForm(forms.Form):
+    username = forms.CharField(
+        label="Usuario",
+        max_length=50,
+        required=True,
+        widget=forms.TextInput(attrs={
+            'class': 'form-control',
+            'placeholder': 'Ingrese su usuario'
+        })
+    )
+    password = forms.CharField(
+        label="Contraseña",
+        widget=forms.PasswordInput(attrs={
+            'class': 'form-control', 
+            'placeholder': 'Ingrese su contraseña'
+        }),
+        required=True
+    )
+    
 class PlatoForm(forms.Form):
     descripcion = forms.CharField(label="Descripción", max_length=200, required=True)
     precio = forms.DecimalField(label="Precio", max_digits=10, decimal_places=2, required=True)
